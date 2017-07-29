@@ -1,0 +1,156 @@
+.loginPage {
+  background-color: #f2f2f2;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  height: 100vh
+}
+
+.navbar-item {
+  height: 44px;
+  background-color: #222222;
+  color: #ffffff;
+  border-radius: 0;
+}
+
+.navbar-item>div {
+  font-weight: 600;
+  font-size: 24px;
+  padding-left: 50px;
+  padding-top: 10px;
+}
+
+.loginBox {
+  border-radius: 4px;
+  margin: 0 auto;
+  width: 480px;
+  height: auto;
+  background-color: #fff;
+  text-align: center;
+  padding-bottom: 16px;
+}
+
+.loginTitle {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  color: #333333;
+  padding-top: 40px;
+  padding-bottom: 15px;
+  margin: 0;
+}
+
+.loginTextBox {
+  display: inline-block;
+  width: 360px;
+  height: 47px;
+  max-width: 400px;
+  padding-left: 20px;
+  border-radius: 4px;
+  background-color: #fff;
+  border: 1px solid #354052;
+  font-size: 14px;
+  outline: none;
+}
+
+.auth {
+  background-color: #ffffff;
+  width: 480px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.successBtn {
+  background-color: #1991eb;
+  color: #ffffff;
+}
+
+.successBtn:hover {
+  background-color: #0367b2;
+  color: #ffffff;
+}
+
+.orDiv {
+  padding: 0 15px;
+}
+
+.aside {
+  height: 100%;
+  width: 200px;
+  background-color: #7e7e7e;
+  display: inline-block;
+  float: left;
+}
+
+.aside-button {
+  width: 100%;
+  text-align: left;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.bidContainer {
+  height: calc(100vh - 44px);
+}
+
+.bidComponent {
+  padding: 16px;
+  height: 100%;
+  width: calc(100% - 200px);
+  display: inline-block;
+  overflow: scroll;
+}
+
+.bidSection {
+  display: grid;
+}
+
+.bidLists {
+  max-height: 250px;
+  overflow: scroll;
+}
+
+.bidRow {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  border: 1px solid black;
+}
+
+.bid-modal {
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(19, 19, 19, 0.7)
+}
+
+.bid-modal-content {
+  width: 400px;
+  height: 400px;
+  margin: 0 auto;
+  top: 50%;
+  position: relative;
+  background-color: #ffffff;
+  border-radius: 4px;
+  transform: translateY(-50%);
+}
+
+.bid-modal-header {
+  padding: 16px;
+  border-bottom: 1px solid #beb8b8;
+}
+
+.bid-modal-body {
+  padding: 16px 0;
+  height: 280px;
+  overflow: scroll;
+}
+
+.bid-modal-footer {
+  padding-top: 10px;
+  bottom: 0;
+  border-top: 1px solid #beb8b8;
+}
