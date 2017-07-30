@@ -2,6 +2,7 @@ var Bid = require('../models/Bid');
 var BidTransaction = require('../models/BidTransaction');
 var bodyparser = require('body-parser');
 var moment = require('moment');
+var Promise = require('bluebird');
 
 module.exports = function(router) {
   router.use(bodyparser.json());
@@ -165,9 +166,77 @@ module.exports = function(router) {
         res.json({ success: true });
       });
     })
+  });
 
-    
+  // Close bid
+  router.put('/bid/endbid/:bid_id', function(req, res) {
+    const bidId = req.params.bid_id;
+    if (!bidId) {
+      return res.status(500).json( { isError: true, msg: 'Missing params bid_id' });
+    }
 
+    BidTransaction.find({ bid_id: bidId })
+    .sort({ bid_amount: -1, created_at: 1 })
+    .limit(1)
+    .then(function(transaction) {
+      if (!transaction || !transaction.length) {
+        throw { err: 'no transactions found' };
+      }
+      return Bid.update(
+        { _id: bidId },
+        { $set: { bid_summary: { is_close: true, winner: transaction[0].user_id } }}
+      );
+    })
+    .then(function (isUpdated) {
+      return Bid.findOne({ _id: bidId })
+    })
+    .then(function (data) {
+      res.json({ bid: data });
+    })
+    .catch(function (err) {
+      return res.status(500).json( { isError: true, msg: 'Internal server error', stack: errr });
+    });
+  });
+
+  // Bid Summary after bid end
+  router.put('/bid/summary/:bid_id', function(req, res) {
+    const bidId = req.params.bid_id;
+
+    if (!bidId) {
+      return res.status(500).json( { isError: true, msg: 'Missing params bid_id' });
+    }
+
+    let bid = {};
+
+    Bid.findOne({ _id: bidId, 'bid_summary.is_close': true })
+      .then(function (data) {
+        bid = data.toObject();
+        return BidTransaction.find({ bid_id: bidId })
+      })
+      .then(function (data) {
+        bid.transactions = data;
+        res.json({ bid: bid });
+      })
+      .catch(function (err) {
+        return res.status(500).json({isError: true, msg: 'internal server error', stack: err});
+      });
+  });
+
+  // Close bids summary of the user
+  router.get('/bid/closebids/:user_id', function(req, res) {
+    const userId = req.params.user_id;
+
+    if (!userId) {
+      return res.status(500).json( { isError: true, msg: 'Missing params user_id' });
+    }
+
+    Bid.find({ 'bid_summary.is_close': true, invited_bidders: userId })
+      .then(function (data) {
+        res.json({ bids: data });
+      })
+      .catch(function (err) {
+        return res.status(500).json({isError: true, msg: 'internal server error', stack: err});
+      });
   });
 
 }

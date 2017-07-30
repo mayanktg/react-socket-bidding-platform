@@ -11,6 +11,10 @@ var bidSchema = mongoose.Schema({
   start_date: { type: Date, default: new Date() },
   end_date: { type: Date, required: true },
   is_active: {  type: Boolean, default: true },
+  bid_summary : {
+    is_close: { type: Boolean, default: false },
+    winner: { type: String }
+  },
 
   created_by: String,
   created_at: { type: Date, default: new Date() }
