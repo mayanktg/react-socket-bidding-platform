@@ -21,9 +21,6 @@ class Signup extends Component {
   }
   componentWillMount() {
     const { dispatch, userValidation } = this.props;
-    if(userValidation.length === 0) {
-      dispatch(actions.usernameValidationList());
-    }
   }
   componentDidMount() {
     if (this.state.username.length) {
