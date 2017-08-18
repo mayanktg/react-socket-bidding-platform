@@ -35,7 +35,7 @@ class HomePage extends Component {
     return (
       <div className="loginPage">
         <div className="loginBox">
-          <h1 className="loginTitle">Login to Bidding Platform</h1>
+          <h1 className="loginTitle">Login to Bidding Platform 1</h1>
           <main>
             <form>
               <div>
